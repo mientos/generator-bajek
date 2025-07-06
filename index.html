@@ -26,20 +26,30 @@
     </div>
 
     <div class="form-group">
-        <label for="animalHelper">Ulubione Zwierzę (pomocnik):</label>
+        <div class="label-wrapper">
+            <label for="animalHelper">Ulubione Zwierzę (pomocnik):</label>
+            <button class="random-btn" id="randomAnimalBtn" title="Losuj zwierzę">🎲</button>
+        </div>
         <input type="text" id="animalHelper" placeholder="np. odważny lew, mądra sowa...">
     </div>
 
     <div class="form-group">
-        <label for="magicPlace">Magiczne Miejsce:</label>
+        <div class="label-wrapper">
+            <label for="magicPlace">Magiczne Miejsce:</label>
+            <button class="random-btn" id="randomPlaceBtn" title="Losuj miejsce">🎲</button>
+        </div>
         <input type="text" id="magicPlace" placeholder="np. Tęczowy Las, Podwodna Kraina...">
     </div>
 
     <div class="form-group">
-        <label for="magicItem">Magiczny Przedmiot:</label>
+        <div class="label-wrapper">
+            <label for="magicItem">Magiczny Przedmiot:</label>
+            <button class="random-btn" id="randomItemBtn" title="Losuj przedmiot">🎲</button>
+        </div>
         <input type="text" id="magicItem" placeholder="np. latający dywan, znikająca czapka...">
     </div>
 
+    <!-- Główny przycisk generujący zostaje -->
     <button id="generateBtn">Stwórz Moją Bajkę!</button>
 
     <div id="loading" class="hidden">
