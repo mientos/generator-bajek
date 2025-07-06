@@ -1,14 +1,30 @@
+// --- BANKI LOSOWYCH SŁÓW ---
+const randomAnimals = [
+    'odważny lew', 'mądra sowa', 'szybki gepard', 'przyjazny delfin', 'śpiewający słowik',
+    'wierny pies', 'sprytny lis', 'wesoła wiewiórka', 'magiczny jednorożec', 'pomocny bóbr'
+];
+const randomPlaces = [
+    'Tęczowy Las', 'Podwodna Kraina Koralowców', 'Latająca Wyspa Chmur', 'Kryształowa Jaskinia Szeptów',
+    'Zaczarowany Ogród Pełen Kwiatów', 'Gwiezdna Pustynia', 'Miasto Złotych Wież', 'Dolina Zaginionych Rzek'
+];
+const randomItems = [
+    'latający dywan', 'znikająca czapka', 'magiczny kompas', 'ołówek, który rysuje prawdziwe rzeczy',
+    'mówiące lusterko', 'butelka z nieskończoną lemoniadą', 'klucz otwierający każde drzwi', 'świecące nasiono'
+];
+
 document.addEventListener('DOMContentLoaded', () => {
-    // UPEWNIJ SIĘ, ŻE JEST TU TWÓJ PRAWDZIWY URL!
-    const SCRIPT_URL = 'https://fragrant-lake-fd3a.mientos90.workers.dev'; 
+    const SCRIPT_URL = 'https://fragrant-lake-fd3a.mientos90.workers.dev'; // Upewnij się, że jest tu Twój adres!
 
     const generateBtn = document.getElementById('generateBtn');
     const loadingDiv = document.getElementById('loading');
     const resultDiv = document.getElementById('result');
     const storyTitleEl = document.getElementById('storyTitle');
     const storyContentEl = document.getElementById('storyContent');
+    // Pobranie nowego przycisku losującego
+    const randomizeBtn = document.getElementById('randomizeBtn');
 
     const handleGenerateClick = async () => {
+        // ... (cała ta funkcja zostaje bez zmian)
         const childName = document.getElementById('childName').value.trim();
         const animalHelper = document.getElementById('animalHelper').value.trim();
         const magicPlace = document.getElementById('magicPlace').value.trim();
@@ -52,6 +68,19 @@ document.addEventListener('DOMContentLoaded', () => {
             generateBtn.textContent = "Stwórz kolejną bajkę!";
         }
     };
+
+    // --- LOGIKA PRZYCISKU LOSUJĄCEGO ---
+    const handleRandomizeClick = (event) => {
+        event.preventDefault();
+        const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
+        document.getElementById('animalHelper').value = getRandomElement(randomAnimals);
+        document.getElementById('magicPlace').value = getRandomElement(randomPlaces);
+        document.getElementById('magicItem').value = getRandomElement(randomItems);
+    };
+
+    if (randomizeBtn) {
+        randomizeBtn.addEventListener('click', handleRandomizeClick);
+    }
 
     if (generateBtn) {
         generateBtn.addEventListener('click', handleGenerateClick);
