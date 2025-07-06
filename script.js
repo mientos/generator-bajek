@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // UPEWNIJ SIĘ, ŻE JEST TU TWÓJ PRAWDZIWY URL!
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyy6wj8nwepDREGv3hb6dKX2N8EGR7nlj0aJUn_gXGyCMQ8-EAIQEq-KKBG95aK-6gm/exec'; 
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxok2YQycWygL3VpA6PHDCVfd3zvYMVitgCi8Qde2Ouv_MucOUiOlj_LGNQE0Dd8aPo/exec'; 
 
     const generateBtn = document.getElementById('generateBtn');
     const loadingDiv = document.getElementById('loading');
