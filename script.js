@@ -10,16 +10,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const storyContentEl = document.getElementById('storyContent');
 
     // Pola formularza
-    const childNameInput = document.getElementById('childName');
-    const animalHelperInput = document.getElementById('animalHelper');
-    const magicPlaceInput = document.getElementById('magicPlace');
-    const magicItemInput = document.getElementById('magicItem');
+ 
 
-    const handleGenerateClick = async () => {
-        const childName = childNameInput.value.trim();
-        const animalHelper = animalHelperInput.value.trim();
-        const magicPlace = magicPlaceInput.value.trim();
-        const magicItem = magicItemInput.value.trim();
+   const handleGenerateClick = async () => {
+        const childName = document.getElementById('childName').value.trim();
+        const animalHelper = document.getElementById('animalHelper').value.trim();
+        const magicPlace = document.getElementById('magicPlace').value.trim();
+        const magicItem = document.getElementById('magicItem').value.trim();
 
         if (!childName || !animalHelper || !magicPlace || !magicItem) {
             alert('Proszę wypełnić wszystkie pola!');
@@ -82,5 +79,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    generateBtn.addEventListener('click', handleGenerateClick);
+    if (generateBtn) {
+        generateBtn.addEventListener('click', handleGenerateClick);
+    } else {
+        console.error("Krytyczny błąd: Nie znaleziono przycisku o ID 'generateBtn'!");
+    }
 });
