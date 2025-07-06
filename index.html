@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Bajek AI - Stwórz Wyjątkową Opowieść dla Twojego Dziecka</title>
+    <meta name="description" content="Stwórz w kilka sekund unikalną, spersonalizowaną bajkę dla swojego dziecka. Wpisz imię, wybierz bohatera i zobacz, jak sztuczna inteligencja tworzy magię!">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Generator Bajek AI 🪄</h1>
+            <p>Stwórz wyjątkową opowieść dla swojego dziecka w 30 sekund!</p>
+        </header>
+
+        <main>
+            <div class="form-group">
+                <label for="childName">Imię Dziecka (główny bohater):</label>
+                <input type="text" id="childName" placeholder="np. Zosia, Krzyś...">
+            </div>
+
+            <div class="form-group">
+                <label for="animalHelper">Ulubione Zwierzę (pomocnik):</label>
+                <input type="text" id="animalHelper" placeholder="np. odważny lew, mądra sowa...">
+            </div>
+
+            <div class="form-group">
+                <label for="magicPlace">Magiczne Miejsce:</label>
+                <input type="text" id="magicPlace" placeholder="np. Tęczowy Las, Podwodna Kraina...">
+            </div>
+
+            <div class="form-group">
+                <label for="magicItem">Magiczny Przedmiot:</label>
+                <input type="text" id="magicItem" placeholder="np. latający dywan, znikająca czapka...">
+            </div>
+
+            <button id="generateBtn">Stwórz Moją Bajkę!</button>
+
+            <div id="result" class="hidden">
+                <h2>Oto Twój Magiczny Prompt ✨</h2>
+                <p>Skopiuj poniższy tekst i wklej go do darmowego ChatGPT, Google Gemini lub Claude.ai, aby otrzymać swoją bajkę!</p>
+                <textarea id="promptOutput" readonly></textarea>
+                <button id="copyBtn">Kopiuj Prompt</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2024 TwojaDomena.pl - Wszelkie prawa zastrzeżone.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
