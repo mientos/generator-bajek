@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Adres URL Twojej aplikacji Google Apps Script
-    const SCRIPT_URL = 'TUTAJ_WKLEJ_SWOJ_ADRES_URL_APLIKACJI_INTERNETOWEJ';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDdoSpjA3_MmAJGy1zxU-QdQySBEbwjhNNLIUA_qSxIQ9e8fTnyhQHcZNu0sXX5oZ_/exec';
 
     // Elementy strony
     const generateBtn = document.getElementById('generateBtn');
