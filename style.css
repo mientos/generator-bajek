@@ -156,3 +156,26 @@ footer {
 #storyContent p {
     margin-bottom: 1em; /* Dodaje odstępy między akapitami */
 }
+
+/* Wrapper dla etykiety i przycisku losującego */
+.label-wrapper {
+    display: flex;
+    justify-content: space-between; /* Rozsuwa etykietę i przycisk na boki */
+    align-items: center;    /* Wyrównuje je w pionie */
+    margin-bottom: 5px;
+}
+
+/* Style dla małych przycisków losujących */
+.random-btn {
+    background: none; /* Usuwamy tło */
+    border: none;     /* Usuwamy ramkę */
+    padding: 2px 5px; /* Mały padding */
+    font-size: 1.5em; /* Powiększamy emoji */
+    cursor: pointer;
+    line-height: 1;   /* Poprawia wyrównanie emoji */
+    transition: transform 0.2s ease;
+}
+
+.random-btn:hover {
+    transform: scale(1.2) rotate(20deg); /* Efekt "podskoczenia" i obrotu po najechaniu */
+}
