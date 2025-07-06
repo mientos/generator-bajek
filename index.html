@@ -18,36 +18,29 @@
             <p>Stwórz wyjątkową opowieść dla swojego dziecka w 30 sekund!</p>
         </header>
 
-        <main>
-            <div class="form-group">
-                <label for="childName">Imię Dziecka (główny bohater):</label>
-                <input type="text" id="childName" placeholder="np. Zosia, Krzyś...">
-            </div>
+      <!-- ... (cała sekcja head i header bez zmian) ... -->
+<main>
+    <!-- Formularz zostaje bez zmian -->
+    <div class="form-group">
+        <label for="childName">Imię Dziecka (główny bohater):</label>
+        <input type="text" id="childName" placeholder="np. Zosia, Krzyś...">
+    </div>
+    <!-- ... (reszta pól formularza) ... -->
 
-            <div class="form-group">
-                <label for="animalHelper">Ulubione Zwierzę (pomocnik):</label>
-                <input type="text" id="animalHelper" placeholder="np. odważny lew, mądra sowa...">
-            </div>
+    <button id="generateBtn">Stwórz Moją Bajkę!</button>
 
-            <div class="form-group">
-                <label for="magicPlace">Magiczne Miejsce:</label>
-                <input type="text" id="magicPlace" placeholder="np. Tęczowy Las, Podwodna Kraina...">
-            </div>
+    <!-- ZMIANA TUTAJ: Nowa sekcja na wynik -->
+    <div id="loading" class="hidden">
+        <div class="spinner"></div>
+        <p>AI pisze Twoją bajkę... to może potrwać chwilę...</p>
+    </div>
 
-            <div class="form-group">
-                <label for="magicItem">Magiczny Przedmiot:</label>
-                <input type="text" id="magicItem" placeholder="np. latający dywan, znikająca czapka...">
-            </div>
-
-            <button id="generateBtn">Stwórz Moją Bajkę!</button>
-
-            <div id="result" class="hidden">
-                <h2>Oto Twój Magiczny Prompt ✨</h2>
-                <p>Skopiuj poniższy tekst i wklej go do darmowego ChatGPT, Google Gemini lub Claude.ai, aby otrzymać swoją bajkę!</p>
-                <textarea id="promptOutput" readonly></textarea>
-                <button id="copyBtn">Kopiuj Prompt</button>
-            </div>
-        </main>
+    <div id="result" class="hidden">
+        <h2 id="storyTitle"></h2>
+        <div id="storyContent"></div>
+    </div>
+</main>
+<!-- ... (footer i tag script bez zmian) ... -->
 
         <footer>
             <p>© 2024 TwojaDomena.pl - Wszelkie prawa zastrzeżone.</p>
