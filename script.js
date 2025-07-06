@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // UPEWNIJ SIĘ, ŻE JEST TU TWÓJ PRAWDZIWY URL!
-    const SCRIPT_URL = 'fragrant-lake-fd3a.mientos90.workers.dev'; 
+    const SCRIPT_URL = 'https://fragrant-lake-fd3a.mientos90.workers.dev'; 
 
     const generateBtn = document.getElementById('generateBtn');
     const loadingDiv = document.getElementById('loading');
