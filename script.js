@@ -1,18 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Adres URL Twojej aplikacji Google Apps Script
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDdoSpjA3_MmAJGy1zxU-QdQySBEbwjhNNLIUA_qSxIQ9e8fTnyhQHcZNu0sXX5oZ_/exec';
+    // UPEWNIJ SIĘ, ŻE JEST TU TWÓJ PRAWDZIWY URL!
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxDdoSpjA3_MmAJGy1zxU-QdQySBEbwjhNNLIUA_qSxIQ9e8fTnyhQHcZNu0sXX5oZ_/exec'; 
 
-    // Elementy strony
     const generateBtn = document.getElementById('generateBtn');
     const loadingDiv = document.getElementById('loading');
     const resultDiv = document.getElementById('result');
     const storyTitleEl = document.getElementById('storyTitle');
     const storyContentEl = document.getElementById('storyContent');
 
-    // Pola formularza
- 
-
-   const handleGenerateClick = async () => {
+    const handleGenerateClick = async () => {
         const childName = document.getElementById('childName').value.trim();
         const animalHelper = document.getElementById('animalHelper').value.trim();
         const magicPlace = document.getElementById('magicPlace').value.trim();
@@ -23,56 +19,34 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Pokaż animację ładowania, ukryj stary wynik i przycisk
         loadingDiv.classList.remove('hidden');
         resultDiv.classList.add('hidden');
         generateBtn.disabled = true;
         generateBtn.textContent = "Cierpliwości...";
 
         try {
-            // Przygotuj dane do wysłania
-            const payload = {
-                childName,
-                animalHelper,
-                magicPlace,
-                magicItem
-            };
-
-            // Wyślij zapytanie do naszego "mini-serwera"
+            const payload = { childName, animalHelper, magicPlace, magicItem };
             const response = await fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'no-cache',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                redirect: 'follow',
-                body: JSON.stringify(payload)
+                method: 'POST', mode: 'cors', cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json', },
+                redirect: 'follow', body: JSON.stringify(payload)
             });
-
             const data = await response.json();
+            if (data.error) throw new Error(data.error);
 
-            if (data.error) {
-                throw new Error(data.error);
-            }
-
-            // Przetwarzamy otrzymaną bajkę
             const fullStory = data.story;
-            // Dzielimy tekst na tytuł (pierwsza linijka) i resztę
             const storyParts = fullStory.split('\n');
-            const title = storyParts.shift().replace(/[\"#*]/g, ''); // Usuwamy znaki formatujące z tytułu
-            const content = storyParts.join('<br>'); // Łączymy resztę, zachowując podziały linii
+            const title = storyParts.shift().replace(/[\"#*]/g, '');
+            const content = storyParts.join('<br>');
 
-            // Wyświetlamy bajkę
             storyTitleEl.textContent = title;
-            storyContentEl.innerHTML = content; // Używamy innerHTML, aby <br> działały
+            storyContentEl.innerHTML = content;
             resultDiv.classList.remove('hidden');
 
         } catch (error) {
             console.error('Błąd:', error);
             alert('Wystąpił błąd podczas tworzenia bajki. Spróbuj ponownie później.');
         } finally {
-            // Ukryj animację ładowania i przywróć przycisk
             loadingDiv.classList.add('hidden');
             generateBtn.disabled = false;
             generateBtn.textContent = "Stwórz kolejną bajkę!";
