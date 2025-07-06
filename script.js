@@ -1,68 +1,86 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Pobieramy elementy z którymi będziemy pracować
-    const generateBtn = document.getElementById('generateBtn');
-    const copyBtn = document.getElementById('copyBtn');
-    const resultDiv = document.getElementById('result');
-    const promptOutput = document.getElementById('promptOutput');
+    // Adres URL Twojej aplikacji Google Apps Script
+    const SCRIPT_URL = 'TUTAJ_WKLEJ_SWOJ_ADRES_URL_APLIKACJI_INTERNETOWEJ';
 
-    // Pobieramy pola formularza
+    // Elementy strony
+    const generateBtn = document.getElementById('generateBtn');
+    const loadingDiv = document.getElementById('loading');
+    const resultDiv = document.getElementById('result');
+    const storyTitleEl = document.getElementById('storyTitle');
+    const storyContentEl = document.getElementById('storyContent');
+
+    // Pola formularza
     const childNameInput = document.getElementById('childName');
     const animalHelperInput = document.getElementById('animalHelper');
     const magicPlaceInput = document.getElementById('magicPlace');
     const magicItemInput = document.getElementById('magicItem');
 
-    // Funkcja generująca prompt
-    const generatePrompt = () => {
-        // Pobieramy wartości z pól, usuwając białe znaki z początku i końca
+    const handleGenerateClick = async () => {
         const childName = childNameInput.value.trim();
         const animalHelper = animalHelperInput.value.trim();
         const magicPlace = magicPlaceInput.value.trim();
         const magicItem = magicItemInput.value.trim();
 
-        // Prosta walidacja - sprawdzamy czy wszystkie pola są wypełnione
         if (!childName || !animalHelper || !magicPlace || !magicItem) {
-            alert('Proszę wypełnić wszystkie pola, aby stworzyć magiczną opowieść!');
+            alert('Proszę wypełnić wszystkie pola!');
             return;
         }
 
-        // --- SERCE TWOJEGO NARZĘDZIA: SZABLON PROMPTU ---
-        const promptTemplate = `
-Jesteś światowej klasy autorem bajek dla dzieci w stylu Disneya - ciepłym, mądrym i pełnym magii. Twoim zadaniem jest napisać wyjątkową, spersonalizowaną bajkę.
+        // Pokaż animację ładowania, ukryj stary wynik i przycisk
+        loadingDiv.classList.remove('hidden');
+        resultDiv.classList.add('hidden');
+        generateBtn.disabled = true;
+        generateBtn.textContent = "Cierpliwości...";
 
-Parametry bajki:
-- Główny bohater: ${childName}
-- Zwierzęcy pomocnik: ${animalHelper}
-- Miejsce akcji: ${magicPlace}
-- Magiczny przedmiot: ${magicItem}
+        try {
+            // Przygotuj dane do wysłania
+            const payload = {
+                childName,
+                animalHelper,
+                magicPlace,
+                magicItem
+            };
 
-Instrukcje:
-1.  Napisz bajkę o długości około 400-500 słów.
-2.  Historia musi być pozytywna, budująca i zawierać wyraźny, ale subtelny morał (np. o odwadze, przyjaźni, ciekawości świata, pomaganiu innym).
-3.  Zacznij od pięknego, chwytliwego tytułu.
-4.  Wpleć w historię wszystkie podane parametry w naturalny sposób.
-5.  Zakończ bajkę ciepłym i pokrzepiającym zdaniem.
-6.  Pisz w sposób zrozumiały dla dziecka w wieku 4-8 lat.
-`;
+            // Wyślij zapytanie do naszego "mini-serwera"
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                redirect: 'follow',
+                body: JSON.stringify(payload)
+            });
 
-        // Wstawiamy wygenerowany prompt do pola tekstowego
-        promptOutput.value = promptTemplate.trim();
-        // Pokazujemy sekcję z wynikiem
-        resultDiv.classList.remove('hidden');
+            const data = await response.json();
+
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            // Przetwarzamy otrzymaną bajkę
+            const fullStory = data.story;
+            // Dzielimy tekst na tytuł (pierwsza linijka) i resztę
+            const storyParts = fullStory.split('\n');
+            const title = storyParts.shift().replace(/[\"#*]/g, ''); // Usuwamy znaki formatujące z tytułu
+            const content = storyParts.join('<br>'); // Łączymy resztę, zachowując podziały linii
+
+            // Wyświetlamy bajkę
+            storyTitleEl.textContent = title;
+            storyContentEl.innerHTML = content; // Używamy innerHTML, aby <br> działały
+            resultDiv.classList.remove('hidden');
+
+        } catch (error) {
+            console.error('Błąd:', error);
+            alert('Wystąpił błąd podczas tworzenia bajki. Spróbuj ponownie później.');
+        } finally {
+            // Ukryj animację ładowania i przywróć przycisk
+            loadingDiv.classList.add('hidden');
+            generateBtn.disabled = false;
+            generateBtn.textContent = "Stwórz kolejną bajkę!";
+        }
     };
 
-    // Funkcja kopiowania do schowka
-    const copyPrompt = () => {
-        promptOutput.select();
-        document.execCommand('copy');
-        
-        // Zmieniamy tekst przycisku na chwilę, aby dać znać, że się udało
-        copyBtn.textContent = 'Skopiowano!';
-        setTimeout(() => {
-            copyBtn.textContent = 'Kopiuj Prompt';
-        }, 2000);
-    };
-
-    // Podpinamy funkcje pod kliknięcia przycisków
-    generateBtn.addEventListener('click', generatePrompt);
-    copyBtn.addEventListener('click', copyPrompt);
+    generateBtn.addEventListener('click', handleGenerateClick);
 });
